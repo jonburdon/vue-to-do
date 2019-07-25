@@ -12,6 +12,7 @@
 import Header from './components/layout/Header';
 import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
+import axios from 'axios';
 
 // Don't forget! Each component must be 1) Imported, 2) Listed in export default (below) and 3. included in the html at the top of this file
 export default {
@@ -23,28 +24,7 @@ export default {
   },
   data () {
     return {
-      todos: [
-        {
-          id: 1,
-          title: "Become famous developer",
-          completed: false
-        },
-          {
-          id: 2,
-          title: "Spark paradigm shift in society and cultural thinking through use of technology",
-          completed: false
-        },
-          {
-          id: 3,
-          title: "Sell film rights to my life",
-          completed: true
-        },
-        {
-          id: 4,
-          title: "Retire and live on luxury yaught",
-          completed: false
-        }
-      ]
+      todos: []
     }
   },
   methods: {
@@ -56,6 +36,11 @@ export default {
       // Use spread operator
       this.todos = [...this.todos, newTodo];
       this.title = '';
+    },
+    created() {
+      axios.get('https://jsonplaceholder.typicode.com/todos?limit=5')
+        .then(res => this.todos = res.data)
+        .catch(err => console.log(err));
     }
   }
 }
