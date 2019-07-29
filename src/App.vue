@@ -29,13 +29,27 @@ export default {
   },
   methods: {
     deleteTodo(id) {
-      // Use filter method to select every id in the array apart from that which has been selected by the id clicked.
-      this.todos = this.todos.filter(todo => todo.id !== id);
+      // use axios rather than fetch (preference in tutorial) to delete todo from database
+      // Use filter method to select every id in the array apart from that which has been selected by the id clicked and delete from UI
+      axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+      .then(res => this.todos = this.todos.filter(todo => todo.id !== id))
+      .catch(err => console.log (err));
+
     },
     addTodo(newTodo) {
+      //Destructuring - pull out title and completed from new Todo object
+      const {title, completed} = newTodo;
+
+      // Post a todo to jsonplaceholder site which simulates storing it in a database
+      axios.post('https://jsonplaceholder.typicode.com/todos', {
+        title,
+        completed
+      })
+      .then(res => this.todos = [...this.todos, newTodo])
+      .catch(err => console.log (err));
       // Use spread operator to copy what it in todos and add to it.
-      this.todos = [...this.todos, newTodo];
-      this.title = "";
+      // this.todos = [...this.todos, newTodo];
+      // this.title = "";
     },
     
     
