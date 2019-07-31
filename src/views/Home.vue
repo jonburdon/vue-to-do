@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <Header />
     <!-- Use v-on to listen for data and update the dom -->
     <AddTodo v-on:add-todo="addTodo" />
     <!-- Use v-on to receive id value from del-todo and then call method to delete that todo item -->
@@ -9,7 +8,6 @@
 </template>
 
 <script>
-import Header from "../components/layout/Header";
 import Todos from "../components/Todos";
 import AddTodo from "../components/AddTodo";
 import axios from "axios";
@@ -19,7 +17,6 @@ export default {
   name: "Home",
   components: {
     AddTodo,
-    Header,
     Todos
   },
   data() {

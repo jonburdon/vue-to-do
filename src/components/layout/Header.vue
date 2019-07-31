@@ -1,6 +1,10 @@
 <template>
     <header class="header">
         <h1>Life Goals</h1>
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </div>
     </header>
 </template>
 
@@ -19,6 +23,7 @@ export default {
     }
 
     .header a {
+        text-decoration: none;
         color: #fff;
         padding-right: 5px;
     }
